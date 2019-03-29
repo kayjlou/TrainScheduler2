@@ -65,6 +65,7 @@ db.collection("trains").onSnapshot(snap => {
       .add(minutes, "m")
       .format("HH:MM A");
 
+    // document.querySelector("train-table").remove();
     //Change HTML to reflect data
     let trainElem = document.createElement("tr");
     trainElem.innerHTML = `<td>${name}</td>

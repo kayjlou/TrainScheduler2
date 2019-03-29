@@ -1,3 +1,9 @@
-.panel>.panel-default {
-  background-color: teal
+.panel-heading {
+  background-color: lightblue;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.form-group {
+  padding: 10px
 }
