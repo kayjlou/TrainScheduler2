@@ -44,16 +44,21 @@ db.collection("trains").onSnapshot(snap => {
     console.log(
       `Trains first time: ${time} and comes every ${frequency} minutes`
     );
+
     //Grab current time
     let currentTime = moment().format("HH:MM");
     console.log(`current time: ${currentTime}`);
 
+    //converts first train time
+    let timeConverted = moment(time, "hh:mm").subtract(1, "years");
+    console.log(`first train time converted: ${timeConverted}`);
+
     //Difference between now and unix of train time
-    let difference = moment().diff(moment().unix(time), "minutes");
+    let difference = moment().diff(moment(timeConverted), "minutes");
     console.log(`Difference: ${difference}`);
 
-    //Time apart
-    let remainder = moment().diff(difference, "minutes") % frequency;
+    //Time apart(remainder)
+    let remainder = difference % frequency;
     console.log(`remainder is ${remainder}`);
 
     //Calculates minutes remaining until next train
@@ -63,9 +68,9 @@ db.collection("trains").onSnapshot(snap => {
     //Add minutes to next train to current time
     let nextArr = moment()
       .add(minutes, "m")
-      .format("HH:MM A");
+      .format("hh:mm");
 
-    // document.querySelector("train-table").remove();
+    // document.querySelector("train-table").remove();e
     //Change HTML to reflect data
     let trainElem = document.createElement("tr");
     trainElem.innerHTML = `<td>${name}</td>
