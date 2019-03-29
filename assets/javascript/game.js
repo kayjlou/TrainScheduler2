@@ -1,26 +1,49 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyC2A6gCfH23mJFs4DaUdiOUnY2CLykugQI",
-  authDomain: "trainscheduler-ac366.firebaseapp.com",
-  databaseURL: "https://trainscheduler-ac366.firebaseio.com",
-  projectId: "trainscheduler-ac366",
-  storageBucket: "",
-  messagingSenderId: "547021647264"
+  apiKey: "AIzaSyDL3h8psDVqZjKdkx5GvxAzEfqERI8tnE4",
+  authDomain: "train-25009.firebaseapp.com",
+  databaseURL: "https://train-25009.firebaseio.com",
+  projectId: "train-25009",
+  storageBucket: "train-25009.appspot.com",
+  messagingSenderId: "227750187416"
 };
 
 firebase.initializeApp(config);
 
-const db = firebase.database();
+const db = firebase.firestore();
+//Create object to hold values
+let name, destination, time, frequency;
 
 //On submit push data
 document.querySelector("#submit").addEventListener("click", e => {
   e.preventDefault();
 
-  //Gather inputs
-  let name = document.querySelector("#name").value;
-  let destination = document.querySelector("#destination").value;
-  let time = document.querySelector("#time").value;
-  let frequency = parseInt(document.querySelector("#frequency").value);
+  //Push values to firebase
+  db.collection("trains")
+    //Set name of train as document
+    .doc(document.querySelector("#name").value)
+    .set({
+      // name: document.querySelector("#name").value,
+      destination: document.querySelector("#destination").value,
+      time: document.querySelector("#time").value,
+      frequency: parseInt(document.querySelector("#frequency").value)
+    });
+  console.log("Train has been added");
+  //Clear all the text boxes
+  document.querySelector("#name").value = "";
+  document.querySelector("#destination").value = "";
+  document.querySelector("#time").value = "";
+  document.querySelector("#frequency").value = "";
+});
 
-  console.log(name);
+//Onclick submit display train in table
+document.querySelector("#submit").addEventListener("click", e => {
+  //Prevent refresh
+  e.preventDefault();
+
+  //create variables to hold forebase data
+  let tName = 
+  let tDest =
+  let tTime = 
+  let tFrequency = 
 });
