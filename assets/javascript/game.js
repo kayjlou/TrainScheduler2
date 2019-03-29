@@ -1,4 +1,5 @@
 // Initialize Firebase
+
 var config = {
   apiKey: "AIzaSyDL3h8psDVqZjKdkx5GvxAzEfqERI8tnE4",
   authDomain: "train-25009.firebaseapp.com",
@@ -21,9 +22,9 @@ document.querySelector("#submit").addEventListener("click", e => {
   //Push values to firebase
   db.collection("trains")
     //Set name of train as document
-    .doc(document.querySelector("#name").value)
+    .doc()
     .set({
-      // name: document.querySelector("#name").value,
+      name: document.querySelector("#name").value,
       destination: document.querySelector("#destination").value,
       time: document.querySelector("#time").value,
       frequency: parseInt(document.querySelector("#frequency").value)
@@ -36,14 +37,41 @@ document.querySelector("#submit").addEventListener("click", e => {
   document.querySelector("#frequency").value = "";
 });
 
-//Onclick submit display train in table
-document.querySelector("#submit").addEventListener("click", e => {
-  //Prevent refresh
-  e.preventDefault();
+db.collection("trains").onSnapshot(snap => {
+  snap.docs.forEach(doc => {
+    let { name, destination, time, frequency } = doc.data();
 
-  //create variables to hold forebase data
-  let tName = 
-  let tDest =
-  let tTime = 
-  let tFrequency = 
+    console.log(
+      `Trains first time: ${time} and comes every ${frequency} minutes`
+    );
+    //Grab current time
+    let currentTime = moment().format("HH:MM");
+    console.log(`current time: ${currentTime}`);
+
+    //Difference between now and unix of train time
+    let difference = moment().diff(moment().unix(time), "minutes");
+    console.log(`Difference: ${difference}`);
+
+    //Time apart
+    let remainder = moment().diff(difference, "minutes") % frequency;
+    console.log(`remainder is ${remainder}`);
+
+    //Calculates minutes remaining until next train
+    let minutes = frequency - remainder;
+    console.log(`Minutes until next: ${minutes}`);
+
+    //Add minutes to next train to current time
+    let nextArr = moment()
+      .add(minutes, "m")
+      .format("HH:MM A");
+
+    //Change HTML to reflect data
+    let trainElem = document.createElement("tr");
+    trainElem.innerHTML = `<td>${name}</td>
+    <td>${destination}</td>
+    <td>${frequency}</td>
+    <td>${nextArr}</td>
+    <td>${minutes}</td>`;
+    document.querySelector("#train-table").append(trainElem);
+  });
 });
