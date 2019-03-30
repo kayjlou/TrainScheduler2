@@ -69,6 +69,7 @@ db.collection("trains").onSnapshot(snap => {
     let nextArr = moment()
       .add(minutes, "m")
       .format("HH:MM");
+    console.log(`Next train comes at ${nextArr}`);
 
     // document.querySelector("train-table").remove();e
     //Change HTML to reflect data
