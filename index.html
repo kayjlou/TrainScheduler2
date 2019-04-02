@@ -20,8 +20,7 @@
       <div class="container">
         <h1 class="display-4">Train Scheduler</h1>
         <p class="lead">
-          This is a modified jumbotron that occupies the entire horizontal space
-          of its parent.
+          Train times!!!!!
         </p>
       </div>
     </div>
@@ -52,29 +51,33 @@
         </div>
         <div class="panel-body">
           <!-- Form begins -->
-          <form role="form" class = form>
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" />
-          </div>
-          <div class="form-group">
-            <label for="destination">Destination:</label>
-            <input type="text" class="form-control" id="destination" />
-          </div>
-          <div class="form-group">
-            <label for="time">First Train Time (HH:mm - military time):</label>
-            <input
-              type="text"
-              class="form-control"
-              id="time"
-              placeholder="HH:MM"
-            />
-          </div>
-          <div class="form-group">
-            <label for="frequency">Frequency:</label>
-            <input type="number" class="form-control" id="frequency" />
-          </div>
-          <button class="btn btn-default" id="submit" type"submit>Submit</button>
+          <form role="form" class="form">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" />
+            </div>
+            <div class="form-group">
+              <label for="destination">Destination:</label>
+              <input type="text" class="form-control" id="destination" />
+            </div>
+            <div class="form-group">
+              <label for="time"
+                >First Train Time (HH:mm - military time):</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="time"
+                placeholder="HH:MM"
+              />
+            </div>
+            <div class="form-group">
+              <label for="frequency">Frequency:</label>
+              <input type="number" class="form-control" id="frequency" />
+            </div>
+            <button class="btn btn-default" id="submit" type="submit">
+              Submit
+            </button>
           </form>
         </div>
       </div>
@@ -82,6 +85,5 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="assets/javascript/game.js"></script>
-
   </body>
 </html>

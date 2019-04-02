@@ -1,4 +1,5 @@
 // Initialize Firebase
+let isFilled = false;
 
 var config = {
   apiKey: "AIzaSyDL3h8psDVqZjKdkx5GvxAzEfqERI8tnE4",
@@ -12,13 +13,19 @@ var config = {
 firebase.initializeApp(config);
 
 const db = firebase.firestore();
-//Create object to hold values
-let name, destination, time, frequency;
+
+//variables assigned
+// let name, destination, time, frequency;
+
+//Function to validate form
+// let validateForm = () =>{
+// }
 
 //On submit push data
 document.querySelector("#submit").addEventListener("click", e => {
   e.preventDefault();
-
+  //clear all trains
+  // document.querySelector("#train-table").innerHTML = "";
   //Push values to firebase
   db.collection("trains")
     //Set name of train as document
@@ -29,14 +36,16 @@ document.querySelector("#submit").addEventListener("click", e => {
       time: document.querySelector("#time").value,
       frequency: parseInt(document.querySelector("#frequency").value)
     });
+
   console.log("Train has been added");
+
   //Clear all the text boxes
   document.querySelector("#name").value = "";
   document.querySelector("#destination").value = "";
   document.querySelector("#time").value = "";
   document.querySelector("#frequency").value = "";
 });
-
+// const createTrains = () => {
 db.collection("trains").onSnapshot(snap => {
   snap.docs.forEach(doc => {
     let { name, destination, time, frequency } = doc.data();
@@ -46,12 +55,12 @@ db.collection("trains").onSnapshot(snap => {
     );
 
     //Grab current time
-    let currentTime = moment().format("HH:MM");
+    let currentTime = moment().format("HH:mm");
     console.log(`current time: ${currentTime}`);
 
     //converts first train time
     let timeConverted = moment(time, "hh:mm").subtract(1, "years");
-    console.log(`first train time converted: ${timeConverted}`);
+    console.log(`first train time converted`);
 
     //Difference between now and unix of train time
     let difference = moment().diff(moment(timeConverted), "minutes");
@@ -68,10 +77,9 @@ db.collection("trains").onSnapshot(snap => {
     //Add minutes to next train to current time
     let nextArr = moment()
       .add(minutes, "m")
-      .format("HH:MM");
+      .format("HH:mm");
     console.log(`Next train comes at ${nextArr}`);
 
-    // document.querySelector("train-table").remove();e
     //Change HTML to reflect data
     let trainElem = document.createElement("tr");
     trainElem.innerHTML = `<td>${name}</td>
@@ -82,3 +90,6 @@ db.collection("trains").onSnapshot(snap => {
     document.querySelector("#train-table").append(trainElem);
   });
 });
+// };
+
+// createTrains();
